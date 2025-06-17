@@ -1,9 +1,13 @@
+import { AppDataSource } from "./config/data-source";
 import { PORT } from "./config/envs";
 import server from "./server";
+import "reflect-metadata"
 
-// server.get("/", (_req, res) => {
-//   res.send("Servidor funcionando");
-// });
-server.listen(PORT, () => {
-  console.info(`Server up and running on http://localhost:${PORT}`);
-});
+
+AppDataSource.initialize().then(() => {
+  console.info("DB Connection established");
+  server.listen(PORT, () => {
+    console.info(`Server up and running on http://localhost:${PORT}`);
+  });
+}).catch((error: unknown) => console.log(error));
+

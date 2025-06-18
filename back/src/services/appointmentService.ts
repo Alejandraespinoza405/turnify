@@ -1,51 +1,51 @@
+import { FindManyOptions } from "typeorm";
+import { appointmentRepository } from "../config/data-source";
 import { ICreateAppointmentDTO } from "../dtos/IAppointmentDTO";
-import IAppointment, { AppointmentStatus } from "../interfaces/IAppointment";
+import { Appointment } from "../entities/Appointment";
+import { AppointmentStatus } from "../interfaces/IAppointment";
+import { getUserByIdService } from "./userService";
 
-const appointmentsDB: IAppointment[] = [
-   {
-    id: 1,
-    date: new Date("2025-06-15"),
-    time: "09:00",
-    userId: 1,
-    status: AppointmentStatus.ACTIVE,
-  },
-  {
-    id: 2,
-    date: new Date("2025-06-16"),
-    time: "11:30",
-    userId: 2,
-    status: AppointmentStatus.ACTIVE,
-  },
-  {
-    id: 3,
-    date: new Date("2025-06-17"),
-    time: "14:00",
-    userId: 1,
-    status: AppointmentStatus.CANCELLED,
-  }
-];
-let appointmentId = 4;
+export const getAllAppointmentsService = async (userId: number): Promise<Appointment[]> => {
+  const options: FindManyOptions<Appointment> = {};
 
-export const getAllAppointmentsService = async (): Promise<IAppointment[]> => {
-    return appointmentsDB;
+      if (userId) {
+        options.where = {
+          user: {
+            id: userId,
+          }
+        }
+      }
+
+    const appointments: Appointment[] = await appointmentRepository.find(options);  
+
+    if (!appointments.length) {
+      throw new Error("Appointments Not Found")
+    }
+    return appointments;
 };
-export const getAppointmentByIdService = async (id: number): Promise<IAppointment> => { 
-   const foundAppointment: IAppointment | undefined = appointmentsDB.find((appointment) => appointment.id == id);
+export const getAppointmentByIdService = async (id: number): Promise<Appointment> => { 
+   const foundAppointment: Appointment | null = await appointmentRepository.findOne({
+     where: {
+       id,
+     },
+   });
     if (!foundAppointment) throw new Error("Appointment Not Found");
     return foundAppointment;
 };
 
-export const createAppointmentService = async (appointmentDTO: ICreateAppointmentDTO): Promise<IAppointment> => {
-   const newAppointment: IAppointment = {
-    id: appointmentId,
+export const createAppointmentService = async (appointmentDTO: ICreateAppointmentDTO): Promise<Appointment> => {
+   const foundUser = await getUserByIdService(appointmentDTO.userId);
+  
+  const newAppointment: Appointment = appointmentRepository.create({
     date: appointmentDTO.date,
     status: AppointmentStatus.ACTIVE,
     time: appointmentDTO.time,
-    userId: appointmentDTO.userId,
-   };
-   appointmentId++;
-   appointmentsDB.push(newAppointment)
-   return newAppointment;
+    user: foundUser,
+   });
+   
+   const results: Appointment = await appointmentRepository.save(newAppointment);
+
+   return results;
 };
 
 export const cancelAppointmentService = async (id: number): Promise<number> => {
@@ -54,6 +54,7 @@ export const cancelAppointmentService = async (id: number): Promise<number> => {
    if (foundAppointment.status == AppointmentStatus.CANCELLED) throw new Error("El turno estaba cancelado");
 
    foundAppointment.status = AppointmentStatus.CANCELLED;
+   const results = await appointmentRepository.save(foundAppointment);
 
-   return foundAppointment.id;
+   return results.id;
 };

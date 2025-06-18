@@ -1,26 +1,34 @@
-import ICredential from "../interfaces/ICredential";
+import { EntityManager } from "typeorm";
+import { credentialRepository } from "../config/data-source";
+import { Credential } from "../entities/Credential";
+import bcrypt from "bcryptjs";
 
-const credentialsDB: ICredential[] = [
-  { id: 1, username: "usuario1", password: "pass123" },
-  { id: 2, username: "usuario2", password: "clave456" },
-  { id: 3, username: "usuario3", password: "secreto789" },
-];
-let credentialId = 4;
-export const createCredential = async (username: string, password: string): Promise<number> => {
- const newCredential: ICredential = {
-    id: credentialId,
+
+export const createCredential = async (entityManager: EntityManager, username: string, password: string): Promise<Credential> => {
+  const hashPassword = await bcrypt.hash(password, 10);
+
+ const newCredential: Credential = entityManager.create(Credential, {
     username,
-    password,
- };
- credentialId++;
- credentialsDB.push(newCredential);
- return newCredential.id;
+    password: hashPassword,
+ });
+
+ const results: Credential = await entityManager.save(Credential, newCredential);
+ 
+ return results;
 };
 
-export const validateCredential = async (username: string, password: string): Promise<number>=> {
-  const foundCredential = credentialsDB.find((credential) => credential.username == username);
+export const validateCredential = async (username: string, password: string): Promise<number> => {
+  const foundCredential: Credential | null = await credentialRepository.findOne({
+    where:{
+      username,
+    }
+  });
   
   if (!foundCredential) throw new Error("No existe el username ingresado");
-  if (foundCredential.password != password) throw new Error("Contraseña incorrecta");
+   
+   const isPasswordValid = await bcrypt.compare(password, foundCredential.password);
+
+  if (!isPasswordValid) throw new Error("Contraseña incorrecta");
+
   return foundCredential.id;
 };

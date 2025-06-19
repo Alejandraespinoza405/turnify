@@ -1,0 +1,70 @@
+.pageLayout {
+  display: flex;
+  height: 100vh;
+}
+
+.homeContainer {
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.titulo {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+}
+
+
+.cardImage {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.card p {
+  font-weight: 600;
+  margin: 0;
+  font-size: 16px;
+}
+.cards {
+  display: flex;
+  flex-direction: row;       
+  justify-content: center;  
+  align-items: flex-start;
+  gap: 40px;                 
+  flex-wrap: wrap;        
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  width: 180px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+

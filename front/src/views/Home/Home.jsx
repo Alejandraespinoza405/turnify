@@ -4,6 +4,7 @@ import configImg from '../../assets/imagen-myCard.webp';
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Home.module.css";
 import fondo from '../../assets/Imagen-ondas.png';
+import MyAppointments from '../Home/MyAppointments/MyAppointments';
 
 function Home() {
   return (
@@ -18,7 +19,7 @@ function Home() {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <h2 className={styles.titulo}>Banco que acompaña cada paso 🧠</h2>
+        <h2 className={styles.titulo}>Bienvenido!</h2>
         <section className={styles.cards}>
   <div className={styles.card}>
     <img src={tarjetaImg} alt="Tarjeta" className={styles.cardImage} />
@@ -33,8 +34,9 @@ function Home() {
     <p>Configuración</p>
   </div>
 </section>
-
+<MyAppointments />
       </main>
+       
     </div>
   );
 }

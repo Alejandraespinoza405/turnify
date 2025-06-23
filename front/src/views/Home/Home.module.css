@@ -5,19 +5,20 @@
 
 .homeContainer {
   flex: 1;
-  height: 100vh;
+  min-height: 100vh;         /* ✅ permite crecer si hay más contenido */
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 30px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow: hidden;
-  padding: 0;
+  overflow-y: auto;          /* ✅ muestra scroll si es necesario */
+  padding-bottom: 40px;      /* ✅ agrega espacio para evitar que se corte abajo */
   box-sizing: border-box;
+  padding-top: 80px;
 }
+
 
 .titulo {
   margin: 0;

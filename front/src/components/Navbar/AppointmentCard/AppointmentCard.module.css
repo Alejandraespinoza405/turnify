@@ -1,0 +1,52 @@
+.card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px 25px;
+  margin: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  width: 250px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.card span {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #f0f0f0;
+}
+
+.card span.active {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.card span.cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.card span.completed {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+}
+.status {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+}

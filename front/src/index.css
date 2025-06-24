@@ -1,20 +1,21 @@
 html, body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  height: 100vh;
+  height: 100%;
+  font-family: 'Caprasimo', serif;
+  overflow-y: auto;   /* ✅ permite hacer scroll si el contenido lo necesita */
+  overflow-x: hidden; /* ✅ evita scroll horizontal innecesario */
 }
+
 .caprasimo-regular {
   font-family: "Caprasimo", serif;
   font-weight: 400;
   font-style: normal;
 }
+
 .pageLayout {
-  padding-top: 80px; /* deja espacio para navbar fijo */
+  padding-top: 80px;  /* deja espacio para navbar fijo */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-html, body {
-  font-family: 'Caprasimo', serif;
 }

@@ -1,7 +1,6 @@
 import tarjetaImg from '../../assets/tarjeta.jpg';
 import historicoImg from '../../assets/imagen-transfer.avif';
 import configImg from '../../assets/imagen-myCard.webp';
-import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Home.module.css";
 import fondo from '../../assets/Imagen-ondas.png';
 import MyAppointments from '../Home/MyAppointments/MyAppointments';
@@ -9,7 +8,7 @@ import MyAppointments from '../Home/MyAppointments/MyAppointments';
 function Home() {
   return (
     <div className={styles.pageLayout}>
-      <Navbar />
+      
       <main
         className={styles.homeContainer}
         style={{

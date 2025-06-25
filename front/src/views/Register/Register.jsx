@@ -51,6 +51,7 @@ function Register() {
   }, [form]);
 
   return (
+    <div className={styles.pageWrapper}>
     <main className={styles.registerContainer}>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
@@ -92,6 +93,7 @@ function Register() {
         <button type="submit">Registrarse</button>
       </form>
     </main>
+    </div>
   );
 }
 

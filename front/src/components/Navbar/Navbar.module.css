@@ -17,9 +17,17 @@
 
 /* LOGO */
 .logo {
-  font-size: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
   font-weight: bold;
-  white-space: nowrap;
+  color: white;
+}
+
+.logoImage {
+  height: 99px;
+  width: auto;
 }
 
 /* LINKS EN FILA */
@@ -33,9 +41,9 @@
 }
 
 .navLinks li a {
-  color: white;
+  color: rgb(235, 233, 233);
   text-decoration: none;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -49,53 +57,4 @@
   transform: scale(1.1);
   opacity: 0.8;
   background-color: rgba(255, 255, 255, 0.1);
-}
-
-.navLinks li a::before {
-  content: "👉";
-  opacity: 0;
-  margin-right: 5px;
-  transition: opacity 0.2s;
-}
-
-.navLinks li a:hover::before {
-  opacity: 1;
-}
-
-/* BOTÓN HAMBURGUESA */
-.burger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.burger span {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  border-radius: 2px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .navLinks {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(135deg, #f77062, #fe5196);
-    padding: 20px;
-    gap: 20px;
-  }
-
-  .navLinks.active {
-    display: flex;
-  }
-
-  .burger {
-    display: flex;
-  }
 }

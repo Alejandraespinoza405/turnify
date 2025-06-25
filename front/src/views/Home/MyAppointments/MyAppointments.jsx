@@ -27,6 +27,7 @@ function MyAppointments() {
     }, []);
    
   return (
+    <div className="pageLayout">
     <main className={styles.wrapper}>
       <h2 className={styles.title}>Turnos asignados</h2>
       <div className={styles.appointmentContainer}>
@@ -39,6 +40,7 @@ function MyAppointments() {
           )}
       </div>
     </main>
+    </div>
   );
 }
 

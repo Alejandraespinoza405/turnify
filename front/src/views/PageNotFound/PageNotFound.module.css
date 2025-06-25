@@ -1,0 +1,30 @@
+
+.errorWrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: white;
+  text-align: center;
+}
+
+.errorImage {
+  max-width: 300px;
+  margin-bottom: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.errorTitle {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.errorText {
+  font-size: 18px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}

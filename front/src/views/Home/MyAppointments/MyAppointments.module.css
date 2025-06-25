@@ -1,15 +1,18 @@
 .wrapper {
-  padding: 40px;
+  padding: 30px 60px 60px 60px; 
   text-align: center;
+  
 }
 
 .title {
   font-size: 28px;
-  font-weight: 700;
-  color: white;
+  font-weight: bold;
+  color: #fff;
   margin-bottom: 30px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+margin-top: -20px;
 }
+
 
 .appointmentContainer {
   display: flex;

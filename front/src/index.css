@@ -2,7 +2,10 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Caprasimo', serif;
+  html, body {
+  font-family: 'Poppins', sans-serif;
+}
+
   overflow-y: auto;   /* ✅ permite hacer scroll si el contenido lo necesita */
   overflow-x: hidden; /* ✅ evita scroll horizontal innecesario */
 }
@@ -14,8 +17,13 @@ html, body {
 }
 
 .pageLayout {
-  padding-top: 80px;  /* deja espacio para navbar fijo */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-top: 80px;
+  background: linear-gradient(135deg, #6e80ff, #b277f2);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+

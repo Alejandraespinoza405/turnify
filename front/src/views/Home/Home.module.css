@@ -1,71 +1,35 @@
-.pageLayout {
-  display: flex;
-  height: 100vh;
-}
-
 .homeContainer {
   flex: 1;
-  min-height: 100vh;         /* ✅ permite crecer si hay más contenido */
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 30px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  overflow-y: auto;          /* ✅ muestra scroll si es necesario */
-  padding-bottom: 40px;      /* ✅ agrega espacio para evitar que se corte abajo */
+  justify-content: center;
   box-sizing: border-box;
-  padding-top: 80px;
+  overflow: hidden;
+  padding: 0 40px;
 }
 
-
-.titulo {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 700;
-  color: white;
-  text-align: center;
-}
-
-
-.cardImage {
-  width: 80px;
-  height: auto;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  object-fit: cover;
-}
-.card p {
-  font-weight: 600;
-  margin: 0;
-  font-size: 16px;
-}
-.cards {
+.presentacion {
   display: flex;
-  flex-direction: row;       
-  justify-content: center;  
-  align-items: flex-start;
-  gap: 40px;                 
-  flex-wrap: wrap;        
-  margin-top: 20px;
-}
-
-.card {
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  width: 180px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease;
-  cursor: pointer;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
   text-align: center;
 }
 
-.card:hover {
-  transform: translateY(-6px);
+.textoPresentacion {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  max-width: 500px;
+}
+
+.imagenPresentacion {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.3);
 }
 

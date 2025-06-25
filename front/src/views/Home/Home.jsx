@@ -1,43 +1,30 @@
-import tarjetaImg from '../../assets/tarjeta.jpg';
-import historicoImg from '../../assets/imagen-transfer.avif';
-import configImg from '../../assets/imagen-myCard.webp';
-import styles from "./Home.module.css";
-import fondo from '../../assets/Imagen-ondas.png';
-import MyAppointments from '../Home/MyAppointments/MyAppointments';
+import styles from './Home.module.css';
+
+import tarjetaDigital from '../../assets/imagen-myCard.webp';
 
 function Home() {
   return (
-    <div className={styles.pageLayout}>
+    <div
       
-      <main
-        className={styles.homeContainer}
-        style={{
-          backgroundImage: `url(${fondo})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-        <h2 className={styles.titulo}>Bienvenido!</h2>
-        <section className={styles.cards}>
-  <div className={styles.card}>
-    <img src={tarjetaImg} alt="Tarjeta" className={styles.cardImage} />
-    <p>Tarjeta</p>
-  </div>
-  <div className={styles.card}>
-    <img src={historicoImg} alt="Histórico" className={styles.cardImage} />
-    <p>Histórico</p>
-  </div>
-  <div className={styles.card}>
-    <img src={configImg} alt="Configuración" className={styles.cardImage} />
-    <p>Configuración</p>
-  </div>
-</section>
-<MyAppointments />
-      </main>
-       
+  className={styles.homeContainer}
+  style={{
+    background: 'linear-gradient(135deg, #6e8efb, #a777e3)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  }}
+>
+
+      <div className={styles.presentacion}>
+        <div className={styles.textoPresentacion}>
+          <h2>Bienvenido!</h2>
+          <h3>Gestioná tu dinero de forma segura y fácil con <br /> nuestra banca digital</h3>
+        </div>
+        <img src={tarjetaDigital} alt="Presentación" className={styles.imagenPresentacion} />
+      </div>
     </div>
   );
 }
 
 export default Home;
+

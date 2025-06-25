@@ -63,3 +63,11 @@ button {
 button:hover {
   background: linear-gradient(135deg, #fe5196, #f77062);
 }
+.pageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #7a6ff0, #c084fc);
+  padding: 40px 20px;
+}

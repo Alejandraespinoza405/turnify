@@ -2,12 +2,15 @@ import { useState } from 'react';
 import styles from './Login.module.css';
 import validateLogin from '../../helpers/validateLogin';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 function Login() {
   const initialState = {
     username: '',
     password: '',
   };
+  const navigate = useNavigate(); 
 
   const [form, setForm] = useState(initialState);
   const [errors, setErrors] = useState({});
@@ -31,6 +34,11 @@ function Login() {
       const response = await axios.post('http://localhost:3000/users/login', form);
       console.log(response.data);
       setMessage('Login exitoso');
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      const user = JSON.parse(localStorage.getItem("user"));
+      console.log(user);
+
+      navigate("/");
     } catch (error) {
       console.error(error);
       setMessage('Error al iniciar sesión');

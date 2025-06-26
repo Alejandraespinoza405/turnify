@@ -4,7 +4,6 @@ import validateLogin from '../../helpers/validateLogin';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-
 function Login() {
   const initialState = {
     username: '',
@@ -32,12 +31,8 @@ function Login() {
 
     try {
       const response = await axios.post('http://localhost:3000/users/login', form);
-      console.log(response.data);
       setMessage('Login exitoso');
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      const user = JSON.parse(localStorage.getItem("user"));
-      console.log(user);
-
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -46,21 +41,23 @@ function Login() {
   };
 
   return (
-    <main className={styles.loginContainer}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Usuario:</label>
-        <input type="text" name="username" value={form.username} onChange={handleChange} />
-        {errors.username && <p className={styles.error}>{errors.username}</p>}
+    <div className={styles.pageWrapper}>
+      <main className={styles.loginContainer}>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Usuario:</label>
+          <input type="text" name="username" value={form.username} onChange={handleChange} />
+          {errors.username && <p className={styles.error}>{errors.username}</p>}
 
-        <label>Contraseña:</label>
-        <input type="password" name="password" value={form.password} onChange={handleChange} />
-        {errors.password && <p className={styles.error}>{errors.password}</p>}
+          <label>Contraseña:</label>
+          <input type="password" name="password" value={form.password} onChange={handleChange} />
+          {errors.password && <p className={styles.error}>{errors.password}</p>}
 
-        <button type="submit">Iniciar sesión</button>
-      </form>
-      {message && <p>{message}</p>}
-    </main>
+          <button type="submit">Iniciar sesión</button>
+        </form>
+        {message && <p>{message}</p>}
+      </main>
+    </div>
   );
 }
 

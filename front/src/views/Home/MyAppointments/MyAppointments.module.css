@@ -1,7 +1,6 @@
 .wrapper {
   padding: 30px 60px 60px 60px; 
   text-align: center;
-  
 }
 
 .title {
@@ -12,8 +11,6 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 margin-top: -20px;
 }
-
-
 .appointmentContainer {
   display: flex;
   flex-wrap: wrap;

@@ -6,7 +6,9 @@ import { AppointmentStatus } from "../interfaces/IAppointment";
 import { getUserByIdService } from "./userService";
 
 export const getAllAppointmentsService = async (userId: number): Promise<Appointment[]> => {
-  const options: FindManyOptions<Appointment> = {};
+  const options: FindManyOptions<Appointment> = {
+    relations: ["user"],
+  };
 
       if (userId) {
         options.where = {
@@ -18,9 +20,6 @@ export const getAllAppointmentsService = async (userId: number): Promise<Appoint
 
     const appointments: Appointment[] = await appointmentRepository.find(options);  
 
-    if (!appointments.length) {
-      throw new Error("Appointments Not Found")
-    }
     return appointments;
 };
 export const getAppointmentByIdService = async (id: number): Promise<Appointment> => { 

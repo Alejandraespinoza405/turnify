@@ -13,7 +13,7 @@ appointmentRouter.get("/", getAllAppointments);
 appointmentRouter.get("/:id", getAppointmentById);
 
 
-appointmentRouter.post("/schedule", scheduleAppointment);
+appointmentRouter.post("/", scheduleAppointment);
 
 
 appointmentRouter.post("/cancel/:id", cancelAppointment);

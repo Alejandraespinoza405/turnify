@@ -50,3 +50,18 @@
   font-size: 14px;
   font-weight: bold;
 }
+.cancelButton {
+  margin-top: 12px;
+  background-color: #ff7a7a;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #e25b5b;
+}

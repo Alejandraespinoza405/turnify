@@ -1,4 +1,3 @@
-/* NAVBAR HORIZONTAL */
 .sidebar {
   width: 100%;
   height: 80px;
@@ -14,8 +13,6 @@
   left: 0;
   z-index: 1000;
 }
-
-/* LOGO */
 .logo {
   display: flex;
   align-items: center;
@@ -29,8 +26,6 @@
   height: 99px;
   width: auto;
 }
-
-/* LINKS EN FILA */
 .navLinks {
   list-style: none;
   display: flex;
@@ -57,4 +52,11 @@
   transform: scale(1.1);
   opacity: 0.8;
   background-color: rgba(255, 255, 255, 0.1);
+}
+.logoutButton {
+  background: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }

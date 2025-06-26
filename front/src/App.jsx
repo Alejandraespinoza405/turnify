@@ -6,6 +6,9 @@ import Login from './views/Login/Login';
 import PageNotFound from './views/PageNotFound/PageNotFound';
 import Register from './views/Register/Register';
 import { Route, Routes } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
+
 function App() {
   return (
     <div className="pageLayout">
@@ -13,10 +16,18 @@ function App() {
      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/appointments" element={<MyAppointments />} />
+        
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
+        <Route
+            path="/appointments"
+            element={
+            <PrivateRoute>
+             <MyAppointments />
+               </PrivateRoute>
+                }
+          />
      </Routes>
     </div>
   );

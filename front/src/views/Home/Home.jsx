@@ -14,14 +14,13 @@ function Home() {
     backgroundRepeat: 'no-repeat',
   }}
 >
-
-      <div className={styles.presentacion}>
-        <div className={styles.textoPresentacion}>
-          <h2>Bienvenido!</h2>
-          <h3>Gestioná tu dinero de forma segura y fácil con <br /> nuestra banca digital</h3>
-        </div>
-        <img src={tarjetaDigital} alt="Presentación" className={styles.imagenPresentacion} />
-      </div>
+<div className={styles.presentacion}>
+  <div className={styles.textoPresentacion}>
+    <h2>Bienvenido!</h2>
+    <h3>Gestioná tu dinero de forma segura y fácil con <br /> nuestra banca digital</h3>
+  </div>
+   <img src={tarjetaDigital} alt="Presentación" className={styles.imagenPresentacion} />
+</div>
     </div>
   );
 }

@@ -1,14 +1,13 @@
 .homeContainer {
   flex: 1;
-  height: 100vh;
+  min-height: calc(100vh - 70px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 80px;
   box-sizing: border-box;
   overflow: hidden;
-  padding: 0 40px;
-}
-
+}  
 .presentacion {
   display: flex;
   align-items: center;
@@ -27,7 +26,7 @@
 }
 
 .imagenPresentacion {
-  max-width: 400px;
+  max-width: 500px;
   width: 100%;
   border-radius: 20px;
   box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.3);

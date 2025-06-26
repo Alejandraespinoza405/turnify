@@ -5,6 +5,7 @@ import { Appointment } from "../entities/Appointment";
 export const getAllAppointments = async (req: Request, res: Response) => {
   try {
     const { userId } = req.query;
+    console.log("Recibido userId:", userId);
     const appointments: Appointment[] = await getAllAppointmentsService(Number(userId));
     res.status(200).json(appointments);
   } catch (error: unknown) {

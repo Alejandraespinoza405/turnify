@@ -2,8 +2,12 @@ import { useState, useEffect } from 'react';
 import styles from './Register.module.css';
 import validateRegister from '../../helpers/validateRegister';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 function Register() {
+  const navigate = useNavigate();
+
   const initialState = {
     name: '',
     email: '',
@@ -38,6 +42,8 @@ function Register() {
 
     console.log(response.data);
     alert("Registro exitoso");
+    navigate("/login");
+
     setForm(initialState);
   } catch (error) {
     console.error("Error al registrar:", error);

@@ -12,6 +12,7 @@ export const getAllUsersService = async (): Promise<IUserResponseDTO[]> => {
       birthdate: user.birthdate,
       email: user.email,
       nDni: user.nDni,
+      role: user.role,
       appointments: user.appointments,
     }));
 };
@@ -33,6 +34,7 @@ export const getUserByIdService = async (id: number): Promise<IUserResponseDTO> 
       birthdate: foundUser.birthdate,
       email: foundUser.email,
       nDni: foundUser.nDni,
+      role: foundUser.role,
       appointments: foundUser.appointments,
     };
 };
@@ -58,6 +60,7 @@ export const createUser = async (userDTO: IUserRegisterDTO): Promise<IUserRespon
       birthdate: resultUser.birthdate,
       email: resultUser.email,
       nDni: resultUser.nDni,
+      role: resultUser.role,
       appointments: resultUser.appointments,
     };
 };
@@ -85,6 +88,7 @@ export const loginUserService = async (username: string, password: string) => {
       birthdate: foundUser.birthdate,
       email: foundUser.email,
       nDni: foundUser.nDni,
+      role: foundUser.role,
       appointments: foundUser.appointments,
   }
 };

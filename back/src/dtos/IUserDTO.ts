@@ -1,4 +1,5 @@
 import { Appointment } from "../entities/Appointment";
+import { UserRole } from "../entities/User";
 
 export interface IUserResponseDTO {
     id: number;
@@ -6,6 +7,7 @@ export interface IUserResponseDTO {
     email: string;
     birthdate: Date;
     nDni: number;
+    role: UserRole;
     appointments: Appointment[];
 }
 

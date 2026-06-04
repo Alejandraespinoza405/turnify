@@ -2,6 +2,11 @@ import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn
 import { Credential } from "./Credential";
 import { Appointment } from "./Appointment";
 
+export enum UserRole {
+  ADMIN = "admin",
+  CLIENT = "client",
+}
+
 @Entity({
     name: "users",
 })
@@ -24,6 +29,13 @@ export class USer {
     unique: true,
    })
    nDni: number;
+
+   @Column({
+  type: "enum",
+  enum: UserRole,
+  default: UserRole.CLIENT,
+})
+role: UserRole;
    
    @OneToOne(() => Credential)
     @JoinColumn()

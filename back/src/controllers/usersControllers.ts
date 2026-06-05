@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { createUser, getAllUsersService, getUserByIdService, loginUserService } from "../services/userService";
 import { IUserResponseDTO } from "../dtos/IUserDTO";
-
+import { generateToken } from "../helpers/jwt";
 
 export const getAllUsers = async (_req: Request, res: Response) => {
   try {
@@ -43,14 +43,20 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
+  console.log(req.body);
   try {
     const { username, password } = req.body;
     const user: IUserResponseDTO = await loginUserService(username, password);
+
+    const token = generateToken(user.id, user.role);
+
     res.status(200).json({
       login: true,
+      token,
       user,
     });
   } catch (error: unknown) {
+    console.error(error);
     res.status(500).json({
       message: error instanceof Error ? error.message : 'Unknown Error',
     });

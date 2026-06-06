@@ -5,7 +5,7 @@ import { Appointment } from "../entities/Appointment";
 import { AppointmentStatus } from "../interfaces/IAppointment";
 import { getUserByIdService } from "./userService";
 
-export const getAllAppointmentsService = async (userId: number): Promise<Appointment[]> => {
+export const getAllAppointmentsService = async (userId?: number): Promise<Appointment[]> => {
   const options: FindManyOptions<Appointment> = {
     relations: ["user"],
   };

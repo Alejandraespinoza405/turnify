@@ -1,16 +1,30 @@
 import { Request, Response } from "express";
 import { cancelAppointmentService, createAppointmentService, getAllAppointmentsService, getAppointmentByIdService } from "../services/appointmentService";
 import { Appointment } from "../entities/Appointment";
+import { AuthRequest } from "../interfaces/IAuthRequest";
 
-export const getAllAppointments = async (req: Request, res: Response) => {
+export const getAllAppointments = async (
+  req: AuthRequest,
+  res: Response
+) => {
   try {
-    const { userId } = req.query;
-    console.log("Recibido userId:", userId);
-    const appointments: Appointment[] = await getAllAppointmentsService(Number(userId));
+
+    const user = req.user!;
+
+    console.log(user);
+
+    const appointments =
+  user.role === "admin"
+    ? await getAllAppointmentsService()
+    : await getAllAppointmentsService(user.id);
     res.status(200).json(appointments);
+
   } catch (error: unknown) {
     res.status(500).json({
-      message: error instanceof Error ? error.message : 'Unknown Error',
+      message:
+        error instanceof Error
+          ? error.message
+          : "Unknown Error",
     });
   }
 };

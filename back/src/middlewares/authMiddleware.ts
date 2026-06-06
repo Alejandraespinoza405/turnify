@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/envs";
+import { AuthRequest } from "../interfaces/IAuthRequest";
 
 export const authMiddleware = (
   req: Request,
@@ -22,7 +23,12 @@ export const authMiddleware = (
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
 
-console.log(decoded);
+    (req as AuthRequest).user = decoded as {
+  id: number;
+  role: string;
+  iat: number;
+  exp: number;
+};
     next();
   } catch {
     res.status(401).json({

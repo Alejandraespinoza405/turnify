@@ -12,13 +12,13 @@ appointmentRouter.get("/", authMiddleware, getAllAppointments);
 
 
 
-appointmentRouter.get("/:id", getAppointmentById);
+appointmentRouter.get("/:id", authMiddleware, getAppointmentById);
 
 
-appointmentRouter.post("/", scheduleAppointment);
+appointmentRouter.post("/", authMiddleware, scheduleAppointment);
 
 
-appointmentRouter.post("/cancel/:id", cancelAppointment);
+appointmentRouter.post("/cancel/:id", authMiddleware, cancelAppointment);
 
 
 

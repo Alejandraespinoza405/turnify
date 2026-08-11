@@ -30,16 +30,17 @@ export const getAllAppointments = async (
 };
 
 
-export const getAppointmentById = async (req: Request, res: Response) => {
+export const getAppointmentById = async (req: Request, res: Response): Promise<void>  => {
   try {
     const { id } = req.params;
     const appointment: Appointment = await getAppointmentByIdService(Number(id));
     res.status(200).json(appointment);
   } catch (error: unknown) {
-    if (error instanceof Error && error.message == "Appointment Not Found") {
+    if (error instanceof Error && error.message === "Appointment Not Found") {
       res.status(404).json({
         message: error.message,
       });
+      return;
     }
 
     res.status(500).json({
@@ -49,10 +50,16 @@ export const getAppointmentById = async (req: Request, res: Response) => {
 };
 
 
-export const scheduleAppointment = async (req: Request, res: Response) => {
+export const scheduleAppointment = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-      const appointment: Appointment = await createAppointmentService(req.body);
-      res.status(201).json(appointment);
+     const user = req.user!;
+
+      const appointment: Appointment = await createAppointmentService({
+      ...req.body,
+      userId: user.id,
+    });
+
+     res.status(201).json(appointment);
     } catch (error: unknown) {
       res.status(500).json({
         message: error instanceof Error ? error.message : 'Unknown Error',
@@ -60,20 +67,37 @@ export const scheduleAppointment = async (req: Request, res: Response) => {
     }
 };
 
-export const cancelAppointment = async (req: Request, res: Response) => {
+export const cancelAppointment = async (req: AuthRequest, res: Response): Promise<void> => {
    try {
       const { id } = req.params;
-      const appointmentId: number = await cancelAppointmentService(Number(id));
+      const user = req.user!;
+      const appointmentId: number = await cancelAppointmentService(
+  Number(id),
+  user.id,
+  user.role
+);
       res.status(200).json(appointmentId);
+
    } catch (error: unknown) {
-  if (error instanceof Error && error.message == "Appointment Not Found") {
+  if (error instanceof Error && error.message === "Appointment Not Found") {
     res.status(404).json({
       message: error.message,
     });
+    return;
   }
 
-  res.status(500).json({
-    message: error instanceof Error ? error.message : "Unknown Error",
+if (
+  error instanceof Error &&
+  error.message === "No autorizado para cancelar este turno"
+) {
+  res.status(403).json({
+    message: error.message,
   });
+  return;
+}
+
+res.status(500).json({
+  message: error instanceof Error ? error.message : "Unknown Error",
+});
 };
 };

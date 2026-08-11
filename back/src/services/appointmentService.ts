@@ -27,6 +27,7 @@ export const getAppointmentByIdService = async (id: number): Promise<Appointment
      where: {
        id,
      },
+     relations: ["user"],
    });
     if (!foundAppointment) throw new Error("Appointment Not Found");
     return foundAppointment;
@@ -47,8 +48,17 @@ export const createAppointmentService = async (appointmentDTO: ICreateAppointmen
    return results;
 };
 
-export const cancelAppointmentService = async (id: number): Promise<number> => {
+export const cancelAppointmentService = async (
+  id: number,
+  userId: number,
+  role: string
+): Promise<number> => {
+
    const foundAppointment = await getAppointmentByIdService(id);
+
+   if (role !== "admin" && foundAppointment.user.id !== userId) {
+  throw new Error("No autorizado para cancelar este turno");
+}
 
    if (foundAppointment.status == AppointmentStatus.CANCELLED) throw new Error("El turno estaba cancelado");
 

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { cancelAppointmentService, createAppointmentService, getAllAppointmentsService, getAppointmentByIdService } from "../services/appointmentService";
 import { Appointment } from "../entities/Appointment";
 import { AuthRequest } from "../interfaces/IAuthRequest";
@@ -10,8 +10,6 @@ export const getAllAppointments = async (
   try {
 
     const user = req.user!;
-
-    console.log(user);
 
     const appointments =
   user.role === "admin"
@@ -30,10 +28,18 @@ export const getAllAppointments = async (
 };
 
 
-export const getAppointmentById = async (req: Request, res: Response): Promise<void>  => {
+export const getAppointmentById = async (req: AuthRequest, res: Response): Promise<void>  => {
   try {
     const { id } = req.params;
+    const user = req.user!;
+
     const appointment: Appointment = await getAppointmentByIdService(Number(id));
+        if (user.role !== "admin" && appointment.user.id !== user.id) {
+      res.status(403).json({
+        message: "No autorizado para acceder a este turno",
+      });
+      return;
+    }
     res.status(200).json(appointment);
   } catch (error: unknown) {
     if (error instanceof Error && error.message === "Appointment Not Found") {

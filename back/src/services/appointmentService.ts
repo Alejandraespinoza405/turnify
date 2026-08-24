@@ -55,7 +55,7 @@ export const cancelAppointmentService = async (
 ): Promise<number> => {
 
    const foundAppointment = await getAppointmentByIdService(id);
-
+    // Only admins or appointment owners can cancel an appointment
    if (role !== "admin" && foundAppointment.user.id !== userId) {
   throw new Error("No autorizado para cancelar este turno");
 }

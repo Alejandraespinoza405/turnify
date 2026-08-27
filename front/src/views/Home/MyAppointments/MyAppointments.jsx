@@ -14,8 +14,17 @@ function MyAppointments() {
   const getAppointments = async () => {
       setLoading(true);
       try {
-        const user = JSON.parse(localStorage.getItem("user"));
-        const response = await axios.get(`http://localhost:3000/appointments?userId=${user.id}`);
+const user = JSON.parse(localStorage.getItem("user"));
+const token = localStorage.getItem("token");
+
+const response = await axios.get(
+  `http://localhost:3000/appointments?userId=${user.id}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
         setAppointments(response.data);
         
         const updatedUser = { ...user, appointments: response.data };

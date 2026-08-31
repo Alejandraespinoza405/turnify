@@ -24,14 +24,24 @@ function AppointmentForm({ onCreate }) {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (!user) return alert("Debes iniciar sesión para crear un turno.");
+const user = JSON.parse(localStorage.getItem("user"));
+const token = localStorage.getItem("token");
 
-    try {
-      const response = await axios.post("http://localhost:3000/appointments", {
-        ...form,
-        userId: user.id,
-      });
+if (!user) return alert("Debes iniciar sesión para crear un turno.");
+
+try {
+  const response = await axios.post(
+    "http://localhost:3000/appointments",
+    {
+      ...form,
+      userId: user.id,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
       setMessage("Turno creado exitosamente.");
       setForm({ date: "", time: "", reason: "" });

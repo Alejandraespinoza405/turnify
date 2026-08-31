@@ -6,8 +6,10 @@ function AppointmentCard({ appointment, onCancel }) {
 
   const handleCancel = async () => {
   try {
-    const appointmentDate = new Date(date);
-    const currentDate = new Date();
+    const [year, month, day] = date.split("-").map(Number);
+    const appointmentDate = new Date(year, month - 1, day);
+
+    const currentDate = new Date();   
 
     appointmentDate.setHours(0, 0, 0, 0);
     currentDate.setHours(0, 0, 0, 0);
@@ -17,8 +19,20 @@ function AppointmentCard({ appointment, onCancel }) {
       return;
     }
 
-    await axios.post(`http://localhost:3000/appointments/cancel/${id}`);
-    onCancel();
+    const token = localStorage.getItem("token");
+
+await axios.post(
+  `http://localhost:3000/appointments/cancel/${id}`,
+  {},
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+alert("Turno cancelado correctamente.");
+
+onCancel();
   } catch (error) {
     console.error("Error al cancelar turno:", error);
   }

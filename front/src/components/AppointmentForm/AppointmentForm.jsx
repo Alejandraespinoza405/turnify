@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { validateAppointment } from "../../helpers/validateAppointment";
-import styles from "./AppointmentForm.module.css";
+import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 
 function AppointmentForm({ onCreate }) {
   const [form, setForm] = useState({ date: "", time: "", reason: "" });
@@ -44,6 +44,9 @@ try {
   );
 
       setMessage("Turno creado exitosamente.");
+      setTimeout(() => {
+  setMessage("");
+}, 3000);
       setForm({ date: "", time: "", reason: "" });
       setErrors({});
 
@@ -55,50 +58,96 @@ try {
   };
 
   return (
-    <div className={styles.formContainer}>
-      <h2 className={styles.title}>Solicitar turno</h2>
+    <Box
+  sx={{
+    backgroundColor: "white",
+    borderRadius: "20px",
+    padding: "30px 40px",
+    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+    width: "100%",
+    maxWidth: "500px",
+    margin: "0 auto 40px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+  }}
+>
+<Typography
+  variant="h5"
+  component="h2"
+  align="center"
+  fontWeight="bold"
+  sx={{
+    color: "#333",
+  }}
+>
+  Solicitar turno
+</Typography>
       <form onSubmit={handleSubmit}>
         <div>
-          <label className={styles.label}>Fecha:</label>
-          <input
-            className={styles.input}
-            type="date"
-            name="date"
-            value={form.date}
-            onChange={handleChange}
-          />
-          {errors.date && <p className={styles.error}>{errors.date}</p>}
+<TextField
+  label="Fecha"
+  type="date"
+  name="date"
+  value={form.date}
+  onChange={handleChange}
+  error={Boolean(errors.date)}
+  helperText={errors.date || ""}
+  fullWidth
+  slotProps={{
+    inputLabel: {
+      shrink: true,
+    },
+  }}
+/>
         </div>
         <div>
-          <label className={styles.label}>Hora:</label>
-          <input
-            className={styles.input}
-            type="time"
-            name="time"
-            value={form.time}
-            onChange={handleChange}
-            min="09:00"
-            max="15:00"
-          />
-          {errors.time && <p className={styles.error}>{errors.time}</p>}
+<TextField
+  label="Hora"
+  type="time"
+  name="time"
+  value={form.time}
+  onChange={handleChange}
+  error={Boolean(errors.time)}
+  helperText={errors.time || ""}
+  fullWidth
+  slotProps={{
+    inputLabel: {
+      shrink: true,
+    },
+    htmlInput: {
+      min: "09:00",
+      max: "15:00",
+    },
+  }}
+/>
         </div>
         <div>
-          <label className={styles.label}>Motivo:</label>
-          <input
-            className={styles.input}
-            type="text"
-            name="reason"
-            value={form.reason}
-            onChange={handleChange}
-          />
-          {errors.reason && <p className={styles.error}>{errors.reason}</p>}
+          <TextField
+  label="Motivo"
+  type="text"
+  name="reason"
+  value={form.reason}
+  onChange={handleChange}
+  error={Boolean(errors.reason)}
+  helperText={errors.reason || ""}
+  fullWidth
+/>
         </div>
-        <button className={styles.submitButton} type="submit">
-          Crear turno
-        </button>
+<Button
+  type="submit"
+  variant="contained"
+  size="large"
+>
+  Crear turno
+</Button>
       </form>
-      {message && <p className={styles.message}>{message}</p>}
-    </div>
+      {message && (
+  <Alert severity={message.includes("exitosamente") ? "success" : "error"}>
+    {message}
+  </Alert>
+)}
+    </Box>
   );
 }
 

@@ -60,3 +60,43 @@
   font-weight: bold;
   cursor: pointer;
 }
+.burger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .burger span {
+    width: 28px;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+  }
+
+  .navLinks {
+    display: none;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 220px;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    margin: 0;
+    background: #b85bc5;
+  }
+
+  .navLinks.active {
+    display: flex;
+  }
+
+  .navLinks li a {
+    font-size: 18px;
+  }
+}

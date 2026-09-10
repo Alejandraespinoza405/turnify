@@ -58,20 +58,20 @@ try {
   };
 
   return (
-    <Box
-  sx={{
-    backgroundColor: "white",
-    borderRadius: "20px",
-    padding: "30px 40px",
-    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
-    width: "100%",
-    maxWidth: "500px",
-    margin: "0 auto 40px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "20px",
-  }}
->
+   <Box
+    sx={{
+      backgroundColor: "white",
+      borderRadius: "20px",
+      padding: { xs: "30px 16px", sm: "30px 40px" },
+      boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+      width: { xs: "calc(100% - 32px)", sm: "100%" },
+      maxWidth: "500px",
+      margin: "0 auto 40px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "20px",
+    }}
+  >
 <Typography
   variant="h5"
   component="h2"

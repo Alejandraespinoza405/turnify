@@ -8,9 +8,14 @@ function Navbar() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+  setOpen(false);
+  localStorage.removeItem("user");
+  navigate("/login");
+};
+
+  const handleNavClick = () => {
+  setOpen(false);
+};
 
   return (
     <nav className={styles.sidebar}>
@@ -25,13 +30,18 @@ function Navbar() {
       </div>
 
       <ul className={`${styles.navLinks} ${open ? styles.active : ""}`}>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/appointments">Turnos</Link></li>
+        <li><Link to="/" onClick={handleNavClick}>Home</Link></li>
+        {user && (
+    <>
 
+        <li><Link to="/appointments/new" onClick={handleNavClick}>Solicitar turno</Link></li>
+        <li><Link to="/appointments" onClick={handleNavClick}>Mis turnos</Link></li>  
+         </>
+  )}
         {!user && (
           <>
-            <li><Link to="/register">Register</Link></li>
-            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/register" onClick={handleNavClick}>Register</Link></li>
+            <li><Link to="/login" onClick={handleNavClick}>Login</Link></li>
           </>
         )}
 

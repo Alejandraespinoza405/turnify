@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./MyAppointments.module.css";
 import AppointmentCard from "../../../components/Navbar/AppointmentCard/AppointmentCard";
-import AppointmentForm from "../../../components/AppointmentForm/AppointmentForm";
 import axios from "axios";
+import { Grid } from "@mui/material";
 
 function MyAppointments() {
   const [appointments, setAppointments] = useState([]);
@@ -53,25 +53,34 @@ const response = await axios.get(
   return (
     <div className="pageLayout">
       <main className={styles.wrapper}>
-        <h2 className={styles.title}>Reservar turno</h2>
-        <AppointmentForm onCreate={(newAppointment) => {
-        setAppointments((prev) => [...prev, newAppointment]);
-        }} />
-
-        <h2 className={styles.title}>Turnos asignados</h2>
+        <h2 className={styles.title}>Mis turnos</h2>
 
         <div className={styles.appointmentContainer}>
-          {loading ? (
-            <h3>Cargando...</h3>
-          ) : error ? (
-            <h3>{error}</h3>
-          ) : appointments.length === 0 ? (
-            <p>Aún no tenés turnos agendados.</p>
-          ) : (
-            appointments.map((appoint) => (
-              <AppointmentCard key={appoint.id} appointment={appoint} onCancel={getAppointments} />
-            ))
-          )}
+         {loading ? (
+  <h3>Cargando...</h3>
+) : error ? (
+  <h3>{error}</h3>
+) : appointments.length === 0 ? (
+  <p>Aún no tenés turnos agendados.</p>
+) : (
+  <Grid container spacing={2}>
+    {appointments.map((appoint) => (
+      <Grid
+        key={appoint.id}
+        size={{ xs: 12, sm: 6, md: 4 }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <AppointmentCard
+          appointment={appoint}
+          onCancel={getAppointments}
+        />
+      </Grid>
+    ))}
+  </Grid>
+)}
         </div>
       </main>
     </div>

@@ -1,5 +1,5 @@
-import styles from "./AppointmentCard.module.css";
 import axios from "axios";
+import { Box, Button, Chip, Typography } from "@mui/material";
 
 function AppointmentCard({ appointment, onCancel }) {
   const { id, date, time, status } = appointment;
@@ -38,25 +38,68 @@ onCancel();
   }
 };
 
-  return (
-    <div className={styles.card}>
-      <p><strong>Date:</strong> {date}</p>
-      <p><strong>Time:</strong> {time}</p>
-      <span
-        className={`${styles.status} ${
-          status === "active" ? styles.active : styles.cancelled
-        }`}
-      >
-        {status}
-      </span>
+return (
+  <Box
+    sx={{
+      backgroundColor: "white",
+      borderRadius: "20px",
+      padding: "20px 25px",
+      margin: "15px",
+      boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+      width: { xs: "calc(100% - 30px)", sm: "250px" },
+      boxSizing: "border-box",
+      transition: "transform 0.2s ease",
+      "&:hover": {
+        transform: "translateY(-5px)",
+      },
+    }}
+  >
+    <Typography sx={{ margin: "8px 0", fontSize: "16px", color: "#333" }}>
+      <strong>Fecha:</strong> {date}
+    </Typography>
 
-      {status === "active" && (
-        <button className={styles.cancelButton} onClick={handleCancel}>
-          Cancelar turno
-        </button>
-      )}
-    </div>
-  );
+    <Typography sx={{ margin: "8px 0", fontSize: "16px", color: "#333" }}>
+      <strong>Hora:</strong> {time}
+    </Typography>
+
+    <Chip
+      label={status}
+      sx={{
+        marginTop: "10px",
+        fontWeight: "bold",
+        backgroundColor:
+          status === "active"
+            ? "#d1fae5"
+            : status === "cancelled"
+            ? "#fee2e2"
+            : "#dbeafe",
+        color:
+          status === "active"
+            ? "#065f46"
+            : status === "cancelled"
+            ? "#991b1b"
+            : "#1e3a8a",
+      }}
+    />
+
+    {status === "active" && (
+      <Button
+        variant="contained"
+        onClick={handleCancel}
+        sx={{
+          marginTop: "12px",
+          width: { xs: "100%", sm: "auto" },
+          backgroundColor: "#ff7a7a",
+          "&:hover": {
+            backgroundColor: "#e25b5b",
+          },
+        }}
+      >
+        Cancelar turno
+      </Button>
+    )}
+  </Box>
+);
 }
 
 export default AppointmentCard;

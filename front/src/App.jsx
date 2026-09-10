@@ -7,6 +7,7 @@ import PageNotFound from './views/PageNotFound/PageNotFound';
 import Register from './views/Register/Register';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import NewAppointment from './views/Home/NewAppointment/NewAppointment';
 
 
 function App() {
@@ -28,6 +29,14 @@ function App() {
                </PrivateRoute>
                 }
           />
+          <Route
+  path="/appointments/new"
+  element={
+    <PrivateRoute>
+      <NewAppointment />
+    </PrivateRoute>
+  }
+/>
      </Routes>
     </div>
   );
